@@ -1,9 +1,7 @@
 package gov.iti.career.hub.authroizationserver.config;
 
-import gov.iti.career.hub.authroizationserver.entities.Authority;
 import gov.iti.career.hub.authroizationserver.entities.Role;
 import gov.iti.career.hub.authroizationserver.entities.clients.*;
-import gov.iti.career.hub.authroizationserver.entities.enums.AuthorityName;
 import gov.iti.career.hub.authroizationserver.entities.enums.AuthorizationGrantType;
 import gov.iti.career.hub.authroizationserver.entities.enums.ClientAuthenticationMethod;
 import gov.iti.career.hub.authroizationserver.entities.enums.RoleName;
@@ -28,13 +26,11 @@ public class JpaApplicationRunner implements ApplicationRunner {
     private final GrantTypeRepository grantTypeRepository;
     private final AuthenticationMethodRepository authenticationMethodRepository;
     private final ScopeRepository scopeRepository;
+    private final RoleRepository roleRepository;
 
     @Override
     @Transactional
     public void run(ApplicationArguments args){
-        Authority read = Authority.builder().name(AuthorityName.READ).build();
-        Authority write = Authority.builder().name(AuthorityName.WRITE).build();
-        Authority execute = Authority.builder().name(AuthorityName.EXECUTE).build();
 
         Scope openid = Scope.builder()
                 .name(OidcScopes.OPENID)
@@ -84,24 +80,27 @@ public class JpaApplicationRunner implements ApplicationRunner {
 
         Role admin = Role.builder()
                 .name(RoleName.ADMIN)
-                .authorities(Set.of(read, write, execute))
                 .build();
         Role moderator = Role.builder()
-                .name(RoleName.MODERATOR)
-                .authorities(Set.of(read, execute))
+                .name(RoleName.STUDENT)
                 .build();
 
         User khaled = User.builder()
                 .username("khaled")
                 .password("password")
-                .roles(Set.of(admin))
+                .role(admin)
+                .isActive(false)
                 .build();
 
         User kareem = User.builder()
                 .username("kareem")
                 .password("password")
-                .roles(Set.of(moderator))
+                .role(moderator)
+                .isActive(false)
                 .build();
+
+        roleRepository.save(admin);
+        roleRepository.save(moderator);
 
         scopeRepository.save(openid);
         scopeRepository.save(profile);

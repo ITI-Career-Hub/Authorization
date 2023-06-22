@@ -1,16 +1,16 @@
 package gov.iti.career.hub.authroizationserver.security.entities;
 
-import gov.iti.career.hub.authroizationserver.entities.Authority;
+import gov.iti.career.hub.authroizationserver.entities.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 @AllArgsConstructor
 public class SecurityAuthority implements GrantedAuthority {
 
-    private final Authority authority;
+    private final Role role;
 
     @Override
     public String getAuthority() {
-        return authority.getName().name();
+        return role.getName().name();
     }
 }

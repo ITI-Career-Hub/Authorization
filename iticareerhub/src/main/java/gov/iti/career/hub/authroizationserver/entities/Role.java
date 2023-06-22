@@ -23,15 +23,9 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
+    @Column(name = "role_name",unique = true)
     @Enumerated(value = EnumType.STRING)
     private RoleName name;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(joinColumns = @JoinColumn(name = "role_id")
-            , inverseJoinColumns = @JoinColumn(name = "authority_id"))
-    Set<Authority> authorities = new HashSet<>();
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -16,20 +16,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     public List<User> findAllUsers(){
         return userRepository
                 .findAll();
     }
-
-    @Transactional
-    public User insertUser(User user, Set<RoleName> roleNames){
-        Set<Role> roles = roleRepository.findAll()
-                                            .stream()
-                                            .filter(role -> roleNames.contains(role.getName()))
-                                            .collect(Collectors.toSet());
-        user.setRoles(roles);
-        return userRepository.save(user);
-    }
-
 }
