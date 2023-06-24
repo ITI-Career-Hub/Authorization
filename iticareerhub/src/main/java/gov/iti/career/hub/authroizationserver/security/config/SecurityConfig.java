@@ -56,9 +56,10 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain applicationSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-            .formLogin(Customizer.withDefaults())
+            .formLogin(form -> form.loginPage("/login").permitAll())
             .authorizeHttpRequests(auth ->
-                    auth.anyRequest().authenticated()
+                    auth.requestMatchers("/login").permitAll()
+                    .anyRequest().authenticated()
             );
         return http.build();
     }
