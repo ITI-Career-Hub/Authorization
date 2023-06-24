@@ -81,7 +81,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
         Role admin = Role.builder()
                 .name(RoleName.ADMIN)
                 .build();
-        Role moderator = Role.builder()
+        Role studentRole = Role.builder()
                 .name(RoleName.STUDENT)
                 .build();
 
@@ -89,18 +89,20 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .username("khaled")
                 .password("password")
                 .role(admin)
-                .isActive(false)
+                .pictureUrl("khaled.png")
+                .isActive(true)
                 .build();
 
         User kareem = User.builder()
                 .username("kareem")
                 .password("password")
-                .role(moderator)
+                .pictureUrl("kareem.jpg")
+                .role(studentRole)
                 .isActive(false)
                 .build();
 
         roleRepository.save(admin);
-        roleRepository.save(moderator);
+        roleRepository.save(studentRole);
 
         scopeRepository.save(openid);
         scopeRepository.save(profile);
