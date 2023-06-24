@@ -20,6 +20,8 @@ import org.springframework.security.oauth2.server.authorization.token.JwtEncodin
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -31,7 +33,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
 
     // http://localhost:8888/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://localhost:8888/authorized&code_challenge=J0_D1-mu85IEM27JDkJSAABm7ouWlvrdyBTHH1PyVqQ&code_challenge_method=S256
     // http://localhost:8888/oauth2/token?client_id=client&redirect_uri=http://localhost:8888/authorized&grant_type=authorization_code&code=DdAK0i5Ng6vZHdbncWBJlvzYMv9R_W7fHP-yfg2hEhnUUJyTgiuOHWRTe9xpVljBfzDQNa3RVzR02O7NuHhiE7-3qsoy2ZeFHY8rENGrXDt-4y59AAx7bZLZZi_zofvy&code_verifier=Sg7cyaIYI6We4lhTVbAl0-NsSm8ngsUZ
@@ -101,6 +103,15 @@ public class SecurityConfig {
                                                 .toList();
             context.getClaims().claim("roles", authorities);
         };
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .maxAge(3600);
     }
 }
 

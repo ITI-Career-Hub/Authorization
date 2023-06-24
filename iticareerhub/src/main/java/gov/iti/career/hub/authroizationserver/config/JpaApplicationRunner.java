@@ -64,7 +64,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
         grantTypes.add(refreshToken);
 
         RedirectURI redirectURI = RedirectURI.builder()
-                .uri("http://localhost:8888/authorized")
+                .uri("http://localhost:4200/login")
                 .build();
 
 
