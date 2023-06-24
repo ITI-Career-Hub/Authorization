@@ -61,8 +61,6 @@ public class ClientMapper {
     }
 
     public RegisteredClient toRegisteredClient(Client client){
-        System.out.println("SHIT");
-        System.out.println(client);
         RegisteredClient registeredClient = RegisteredClient.withId(String.valueOf(client.getId()))
                 .clientId(client.getClientId())
                 .clientSecret(client.getSecret())
