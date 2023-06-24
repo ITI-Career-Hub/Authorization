@@ -35,8 +35,8 @@ import java.util.UUID;
 @Configuration
 public class SecurityConfig implements WebMvcConfigurer {
 
-    // http://localhost:8888/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://localhost:8888/authorized&code_challenge=J0_D1-mu85IEM27JDkJSAABm7ouWlvrdyBTHH1PyVqQ&code_challenge_method=S256
-    // http://localhost:8888/oauth2/token?client_id=client&redirect_uri=http://localhost:8888/authorized&grant_type=authorization_code&code=DdAK0i5Ng6vZHdbncWBJlvzYMv9R_W7fHP-yfg2hEhnUUJyTgiuOHWRTe9xpVljBfzDQNa3RVzR02O7NuHhiE7-3qsoy2ZeFHY8rENGrXDt-4y59AAx7bZLZZi_zofvy&code_verifier=Sg7cyaIYI6We4lhTVbAl0-NsSm8ngsUZ
+    // http://localhost:8888/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://localhost:4200/login&code_challenge=J0_D1-mu85IEM27JDkJSAABm7ouWlvrdyBTHH1PyVqQ&code_challenge_method=S256
+    // http://localhost:8888/oauth2/token?client_id=client&redirect_uri=http://localhost:4200/login&grant_type=authorization_code&code=DdAK0i5Ng6vZHdbncWBJlvzYMv9R_W7fHP-yfg2hEhnUUJyTgiuOHWRTe9xpVljBfzDQNa3RVzR02O7NuHhiE7-3qsoy2ZeFHY8rENGrXDt-4y59AAx7bZLZZi_zofvy&code_verifier=Sg7cyaIYI6We4lhTVbAl0-NsSm8ngsUZ
 
 
     @Bean
