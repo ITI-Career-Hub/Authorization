@@ -46,12 +46,13 @@ public class SecurityConfig implements WebMvcConfigurer {
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());
 
-        http.exceptionHandling(
-            e -> e.authenticationEntryPoint(
+        http.csrf(csrf -> csrf.disable())
+        .exceptionHandling(
+                e -> e.authenticationEntryPoint(
                         new LoginUrlAuthenticationEntryPoint("/login")
-            )
+                )
         );
-        return http.build();
+    return http.build();
     }
 
     @Bean
@@ -63,6 +64,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                     auth.requestMatchers("/login").permitAll()
                     .anyRequest().authenticated()
             );
+        http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 
@@ -115,5 +117,3 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 }
-
-
