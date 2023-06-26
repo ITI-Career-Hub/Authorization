@@ -52,7 +52,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                         new LoginUrlAuthenticationEntryPoint("/login")
                 )
         );
-    return http.build();
+
+        return http.build();
     }
 
     @Bean
@@ -65,6 +66,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                     .anyRequest().authenticated()
             );
         http.csrf(csrf -> csrf.disable());
+        http.cors(e -> e.disable());
         return http.build();
     }
 
